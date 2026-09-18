@@ -1,3 +1,4 @@
+from model import paciente
 from model.paciente import Paciente
 from repository.paciente_repository import PacienteRepository
 
@@ -14,9 +15,20 @@ class PacienteService:
         if paciente_existente is not None:
             raise ValueError("já existe um paciente com esse cpf.")
 
-        paciente = Paciente(nome, cpf, idade)
+        paciente = Paciente(None, nome, cpf, idade)
         self.repository.salvar(paciente)
         return paciente
+
+
+
+    def buscar_por_id(self, id):
+        paciente = self.repository.buscar_por_id(id)
+
+        if paciente is None:
+            raise ValueError("Paciente não encontrado.")
+
+        return paciente
+
 
 
     def listar_todos(self):

@@ -31,3 +31,9 @@ for paciente3 in service.listar_todos():
 paciente_buscar = service.buscar_por_cpf("1234")
 
 print(paciente_buscar.nome)
+
+paciente_outro = service.buscar_por_id(1)
+
+
+print("Nome encontrado: ")
+print(paciente_outro.nome)
