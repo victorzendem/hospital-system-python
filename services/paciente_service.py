@@ -19,6 +19,23 @@ class PacienteService:
         self.repository.salvar(paciente)
         return paciente
 
+    def atualizar(self, id, nome, cpf, idade):
+        paciente = self.repository.buscar_por_id(id)
+
+        if paciente is None:
+            raise ValueError("Paciente não encontrado.")
+
+
+        paciente_existente = self.repository.busca_por_cpf(cpf)
+
+        if paciente_existente is not None and paciente_existente.id !=  id:
+            raise ValueError("Já existe um paciente com o CPF informado.")
+
+        paciente.nome = nome
+        paciente.cpf = cpf
+        paciente.idade = idade
+
+        return paciente
 
 
     def buscar_por_id(self, id):
