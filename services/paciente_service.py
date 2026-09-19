@@ -59,6 +59,13 @@ class PacienteService:
             raise ValueError("Paciente não encontrado.")
 
         return paciente
-    
+
+    def excluir(self, id):
+         paciente = self.repository.buscar_por_id(id)
+
+         if paciente is None:
+             raise ValueError("Paciente não encontrado.")
+
+         self.repository.excluir(id)
     
     

@@ -23,3 +23,9 @@ class PacienteRepository:
             if paciente.cpf == cpf:
                 return paciente
         return None
+
+    def excluir(self, id):
+        for paciente in self.pacientes:
+            if paciente.id == id:
+                self.pacientes.remove(paciente)
+        return
