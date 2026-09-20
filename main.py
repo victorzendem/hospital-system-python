@@ -1,39 +1,18 @@
-from model.paciente import Paciente
+from exceptions.paciente_exception import PacienteInvalidoException, PacienteException
 from repository.paciente_repository import PacienteRepository
 from services.paciente_service import PacienteService
-
 
 repository = PacienteRepository()
 service = PacienteService(repository)
 
 
+try:
+    paciente123 = service.cadastrar("Celso", "1111111111", 20)
 
-paciente = service.cadastrar(
-    "Victor Zendem",
-    "1234",
-    20
-)
+    print("Paciente cadastrado com suceso!")
 
-paciente2 = service.cadastrar(
-    "João",
-    "12345",
-    19
-)
+except PacienteInvalidoException as erro:
+    print("Erro de validação:", erro)
 
-
-print("PACIENTES:")
-
-
-for paciente3 in service.listar_todos():
-    print(paciente3.nome)
-    
-    
-paciente_buscar = service.buscar_por_cpf("1234")
-
-print(paciente_buscar.nome)
-
-paciente_outro = service.buscar_por_id(1)
-
-
-print("Nome encontrado: ")
-print(paciente_outro.nome)
+except PacienteException as erro:
+    print("Erro do paciente:", erro)
